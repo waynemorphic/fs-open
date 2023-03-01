@@ -30,17 +30,27 @@ export default function App() {
       number: newNumber
     };
 
+    // loop and condition to check if name exists in phonebook
+    for (let i = 0; i < persons.length; i++) {
+      console.log("persons", persons[i].name);
+      if (persons[i].name.toLowerCase() === personObject.name.toLowerCase()) {
+        const index = persons.indexOf(persons[i].name);
+        console.log(persons.splice(index, 1));
+        console.log(persons);
+        event.target.reset();
+        alert(personObject.name + " already exists in phonebook");
+      } else {
+        setPersons(persons.concat(personObject));
+        setNewName("");
+      }
+    }
     // check if name exists in the phonebook
-    persons.filter((person) => {
-      person.name.toLowerCase() === personObject.name.toLowerCase()
-        ? alert(personObject.name + " already exists in phonebook")
-        : event.target.reset();
-      return person.name;
-    });
-
-    // add name and number on UI
-    setPersons(persons.concat(personObject));
-    setNewName("");
+    // persons.filter((person) => {
+    //   person.name.toLowerCase() === personObject.name.toLowerCase()
+    //     ? alert(personObject.name + " already exists in phonebook")
+    //     : event.target.reset();
+    //   return person.name;
+    // });
   };
 
   return (
